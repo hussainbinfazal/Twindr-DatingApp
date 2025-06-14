@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0%;
+  padding: 0%;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  background-color: #f4f4f4;
+  height: 100%;
+  width: 100%;
+}
+
+/* input {
+  caret-color: transparent;
+} */
+
+.Toggle-Menu {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.Toggle-Menu.block {
+  opacity: 1;
+}
