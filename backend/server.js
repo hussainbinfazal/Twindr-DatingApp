@@ -34,15 +34,15 @@ app.use(cors({
 }));
 
 
-if (process.env.NODE_ENV === 'production') {
-    // Serve static files from the build folder
-    app.use(express.static(path.join(__dirname, 'dist')));
+// if (process.env.NODE_ENV === 'production') {
+//     // Serve static files from the build folder
+//     app.use(express.static(path.join(__dirname, 'dist')));
     
-    // Handle React routing - send all non-API requests to React app
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-    });
-}
+//     // Handle React routing - send all non-API requests to React app
+//     app.get('*', (req, res) => {
+//         res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+//     });
+// }
 
 connectDB();
 
