@@ -111,10 +111,16 @@ const RightHome = ({
   useEffect(() => {
     if (profiles.length === 0 && !loading) {
       setLoading(true);
-      setInterval(() => {
+      const interval = setInterval(() => {
         getAllProfiles();
-      }, 100);
+      }, 10000);
     }
+
+
+    return () => {
+      clearInterval(interval);
+      setLoading(false);
+    };
   }, [profiles, loading, getAllProfiles]);
 
   return (
