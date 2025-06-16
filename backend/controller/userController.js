@@ -2,8 +2,7 @@ const User = require('../model/userModel');
 const Profile = require('../model/profileModel');
 const bcrypt = require('bcrypt');  
 const jwt = require('jsonwebtoken');  
-const { generateToken } = require('../utils/generateToken');  
-
+const generateToken = require('../utils/generateToken');
 // Create User
 const createUser = async (req, res) => {
     try {
