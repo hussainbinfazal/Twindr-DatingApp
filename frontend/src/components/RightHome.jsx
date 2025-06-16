@@ -109,9 +109,10 @@ const RightHome = ({
   }, [, authUserProfile, handleSwipe]);
 
   useEffect(() => {
+    let interval;
     if (profiles.length === 0 && !loading) {
       setLoading(true);
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         getAllProfiles();
       }, 10000);
     }
