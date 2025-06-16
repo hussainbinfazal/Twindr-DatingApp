@@ -1,7 +1,7 @@
-const Profile = require("../model/profileModel");  // Replacing import with require
-const upload = require("../multer/multer");  // Replacing import with require
-const fs = require('fs').promises;  // Replacing import with require
-const mongoose = require("mongoose");  // Replacing import with require
+const Profile = require("../model/profileModel");  
+const upload = require("../multer/multer");  
+const fs = require('fs').promises;  
+const mongoose = require("mongoose");  
 const path = require('path');
 const User = require("../model/userModel");
 // Create Profile
@@ -213,4 +213,4 @@ module.exports = {
     deleteProfile,
     myProfile,
     getProfileById
-};  // Exporting all functions using module.exports
+};  

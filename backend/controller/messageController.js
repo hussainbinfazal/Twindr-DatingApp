@@ -1,5 +1,5 @@
-// const { get } = require("mongoose");
-const Message = require("../model/messageModel");  // Replacing import with require
+
+const Message = require("../model/messageModel");  
 const { getIo, getConnectedUsers } = require("../socket/socket.server");
 
 // Create a Message
@@ -47,16 +47,9 @@ const updateMessageStatus = async (req, res) => {
 
         const io = getIo();
         const connectedUsers = getConnectedUsers();
-        // const receiverSocketId = connectedUsers.get(updatedMessage.receiver);
-        // if (receiverSocketId) {
-        //     io.to(receiverSocketId).emit('messageStatusUpdated', updatedMessage);
-        // }
-        // const senderSocketId = connectedUsers.get(updatedMessage.sender);
         const receiverSocketId = connectedUsers.get(updatedMessage.receiver);
 
-        // if (senderSocketId) {
-        //     io.to(senderSocketId).emit('messageStatusUpdated', updatedMessage);
-        // }
+        
         if (receiverSocketId) {
             io.to(receiverSocketId).emit('messageStatusUpdated', updatedMessage);
         }
@@ -145,4 +138,4 @@ module.exports = {
     getMessageBetweenUser,
     updateMessageStatus,
     updateMessage
-};  // Exporting all functions using module.exports
+};  

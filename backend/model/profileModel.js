@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');  // Replacing import with require
-const User = require('./userModel');   // Replacing import with require
+const mongoose = require('mongoose');  
+const User = require('./userModel');  
 
 const profileSchema = new mongoose.Schema(
     {
@@ -38,4 +38,4 @@ const profileSchema = new mongoose.Schema(
 
 const Profile = mongoose.model('Profile', profileSchema);
 
-module.exports = Profile;  // Replacing export default with module.exports
+module.exports = Profile;  

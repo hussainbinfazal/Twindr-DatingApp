@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');  // Replacing import with require
-const User = require('../model/userModel');  // Replacing import with require
+const jwt = require('jsonwebtoken');  
+const User = require('../model/userModel');  
 
 // Middleware to check if the user is authenticated
 const isAuthenticated = async (req, res, next) => {

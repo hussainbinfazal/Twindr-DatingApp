@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');  // Replacing import with require
+const jwt = require('jsonwebtoken');  
 
 exports.generateToken = (userId, res) => {
     try {

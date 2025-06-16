@@ -1,7 +1,7 @@
 const express = require('express');  // Replacing import with require
 const router = express.Router();
 const { getMatches,SwipeRight,acceptMatch, unmatchProfile, getProfiles, deleteMatchWithUser } = require('../controller/matchController');  // Replacing import with require
-const isAuthenticated  = require('../middlewares/isAuth');  // Replacing import with require
+const isAuthenticated  = require('../middlewares/isAuth');  
 
 
 router.use(isAuthenticated);
@@ -15,4 +15,4 @@ router.post('/match/:id', deleteMatchWithUser);
 
 
 
-module.exports = router;  // Replacing export default with module.exports
+module.exports = router; 

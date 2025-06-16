@@ -17,9 +17,7 @@ body {
   overflow-y: hidden;
 }
 
-/* input {
-  caret-color: transparent;
-} */
+
 
 .Toggle-Menu {
   transition: opacity 0.3s ease-in-out;

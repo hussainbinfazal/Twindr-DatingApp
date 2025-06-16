@@ -1,6 +1,6 @@
     import { io } from 'socket.io-client';
 
-const SOCKET_URl = "http://localhost:5000"; // Connect to the backend server
+const SOCKET_URl = import.meta.env.VITE_SOCKET_URL; // Connect to the backend server
 
 
 let socket = null;
@@ -14,19 +14,10 @@ export const initializeSocket = (userId) => {
   });
 
 
-// socket.on('disconnect', () => {
-// });
-
-// socket.on('message', (data) => {
-// });
-
-// socket.on('receiveMessage', (data) => {
-// });
-// socket.on('newMessage', (data) => { 
-// });
-
 
 }
+
+
 
 export const getSocket = () => {
   if (!socket) {

@@ -1,5 +1,5 @@
-const Match = require("../model/matchModel");  // Replacing import with require
-const Profile = require("../model/profileModel");  // Assuming Profile is also required
+const Match = require("../model/matchModel"); 
+const Profile = require("../model/profileModel"); 
 const User = require("../model/userModel");
 const { getconnectedUsers, getIo } = require("../socket/socket.server");
 // Match a Profile
@@ -109,10 +109,7 @@ const deleteMatchWithUser = async () => {
     res.status(200).json({ message: 'Match deleted successfully' });
 }
 
-// const matchbetweenUser = async (req,res) => {
-//     const createdMatch = await Match.findById({senderId:req.params.id});
-//     res.status(200).json(createdMatch);
-// }
+
 // Unmatch a Profile
 const unmatchProfile = async (req, res) => {
     try {
@@ -142,6 +139,5 @@ module.exports = {
     deleteMatchWithUser,
     getMatches,
 
-};  // Exporting all functions using module.exports
-
+};  
 

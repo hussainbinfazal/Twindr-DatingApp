@@ -1,8 +1,8 @@
-const User = require('../model/userModel');  // Replacing import with require
+const User = require('../model/userModel');  
 const Profile = require('../model/profileModel');
-const bcrypt = require('bcrypt');  // Replacing import with require
-const jwt = require('jsonwebtoken');  // Replacing import with require
-const { generateToken } = require('../utils/generateToken');  // Replacing import with require
+const bcrypt = require('bcrypt');  
+const jwt = require('jsonwebtoken');  
+const { generateToken } = require('../utils/generateToken');  
 
 // Create User
 const createUser = async (req, res) => {
@@ -69,18 +69,8 @@ const updateUser = async (req, res) => {
     }
 };
 
-// Get My Profile
-const myProfile = async (req, res) => {
-    // try {
-    //     const user = await User.findById(req.user.id).select('-password');
-    //     if (!user) {
-    //         return res.status(404).json({ message: 'User not found' });
-    //     }
-    //     res.status(200).json(user);
-    // } catch (error) {
-    //     res.status(500).json({ message: error.message });
-    // }
-};
+
+
 
 // Use Authentication Token
 const useAuthenticationToken = async (req, res, next) => {
@@ -140,7 +130,7 @@ module.exports = {
     getAllUsers, 
     getUserById, 
     updateUser, 
-    myProfile, 
+   
     useAuthenticationToken, 
     loginUser, 
     logoutUser 

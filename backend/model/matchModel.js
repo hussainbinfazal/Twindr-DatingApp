@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const matchSchema = new mongoose.Schema({
   curentUser: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',  // Assuming you have a User model
+    ref: 'User', 
     required: true,
   },
   likedUser: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',  // Assuming you have a User model
+    ref: 'User', 
     required: true,
   },
   status: {

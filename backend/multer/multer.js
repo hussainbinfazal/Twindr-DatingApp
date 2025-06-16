@@ -1,45 +1,4 @@
-// // import multer from 'multer';
-// const multer = require('multer'); // Use require to import multer
-// const path = require('path');
 
-// // Set storage destination and filename
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         // Specify the folder to save the uploaded files
-//         cb(null, 'uploads/profile-pictures');
-//     },
-//     filename: (req, file, cb) => {
-//         // Specify the file name (e.g., user ID + timestamp + file extension)
-//         cb(null, `${req.user.id}-${Date.now()}${path.extname(file.originalname)}`);
-//     },
-
-//     destination: (req, file, cb) => {
-//         cb(null, 'uploads/audio/');
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, `${Date.now()}-${file.originalname}`);
-//     }
-
-
-// });
-
-// // File validation (only accept image files)
-// const fileFilter = (req, file, cb) => {
-//     const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-//     if (allowedTypes.includes(file.mimetype)) {
-//         cb(null, true); // Accept file
-//     } else {
-//         cb(new Error('Invalid file type. Only JPG, PNG, and GIF are allowed.'), false);
-//     }
-// };
-
-// // Multer configuration
-// const upload = multer({
-//     storage: storage
-// });
-
-
-// module.exports = upload;
 
 
 const multer = require('multer');

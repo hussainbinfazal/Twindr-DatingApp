@@ -26,22 +26,21 @@ function App() {
   const HandleConnectionsPanel = (e) => {
     const connectionPanel = document.querySelector(".connection-panel");
     const heartIcon = e.target.closest(".heart-icon");
-    // Close menu if clicked outside of the menu or the profile icon
     if (!connectionPanel || !heartIcon) {
-      setIsConnectionVisible(false); // Close menu if clicked outside
+      setIsConnectionVisible(false); 
     }
   };
   useEffect(() => {
     document.addEventListener("click", HandleConnectionsPanel);
 
-    // Clean up the event listeners when the component unmounts
+    
     return () => {
       document.removeEventListener("click", HandleConnectionsPanel);
     };
   }, []);
   useEffect(() => {
-    // Check authentication status on page load
-    checkAuth(); // This should check the token and update the authUser state accordingly
+    
+    checkAuth(); 
   }, [checkAuth]);
 
   return (
@@ -143,10 +142,7 @@ function App() {
           path="/profile/:profileId"
           element={authUser ? <MatchProfile toggleConnectionPanel={toggleConnectionPanel} isConnectionVisible={isConnectionVisible} setIsConnectionVisible={setIsConnectionVisible}/> : <Navigate to="/firstPage" />}
         />
-        {/* <Route
-          path="/*"
-          element={authUser ? <Home /> : <Navigate to="/firstPage" />}
-        /> */}
+        
       </Routes>
       <Toaster />
     </div>
