@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-spring/web": "^9.7.5",
+    "@tailwindcss/oxide": "^4.1.10",
     "@tailwindcss/vite": "^4.0.4",
     "axios": "^1.7.9",
     "emoji-picker-react": "^4.12.2",
