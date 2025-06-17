@@ -145,7 +145,7 @@ const Header = ({
       {isMenuVisible && (
         <div
           id="toggleMenu"
-          className={`Toggle-Menu w-[140px] h-[145px] rounded-b-lg rounded-l-lg flex justify-center items-center absolute bg-white top-[48px] right-[48px] sm:top-[50px] sm:right-[118px] md:[50px] md:right-[118px] lg:top-[50px] lg:right-[128px] xl:top-[50px] xl:right-[138px] 2xl:top-[50px] 2xl:right-[136px] z-10 ${
+          className={`Toggle-Menu w-[140px] h-[145px] rounded-b-lg rounded-l-lg flex justify-center items-center absolute bg-white top-[48px] right-[48px] sm:top-[50px] sm:right-[118px] md:[50px] md:right-[98px] lg:top-[50px] lg:right-[98px] xl:top-[50px] xl:right-[102px] 2xl:top-[50px] 2xl:right-[105px] z-10 ${
             isMenuVisible ? "block" : "none"
           }`}
         >
