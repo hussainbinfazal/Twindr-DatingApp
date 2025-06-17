@@ -7,8 +7,8 @@ const generateToken = (userId, res) => {
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+            secure: process.env.NODE_ENV === 'production' ? true : "",
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'Lax', maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         });
         return token;
     } catch (error) {
