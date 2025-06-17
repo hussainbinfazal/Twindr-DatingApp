@@ -37,7 +37,6 @@ const initializeSocket = (httpServer) => {
                 io.to(sender).emit('receiveMessage', messageData); // Send message to sender
 
             } catch (error) {
-                console.error('Error while sending message:', error);
             }
         });
 

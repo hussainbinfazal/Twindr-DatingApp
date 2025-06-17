@@ -4,13 +4,13 @@ const { getMatches,SwipeRight,acceptMatch, unmatchProfile, getProfiles, deleteMa
 const isAuthenticated  = require('../middlewares/isAuth');  
 
 
-router.use(isAuthenticated);
+
 // Create a Match
 
-router.get('/matches',getMatches );
-router.post('/swipe-left/:id', unmatchProfile)
-router.post('/swipe-right/:id',SwipeRight)
-router.post('/match/:id', deleteMatchWithUser);
+router.get('/matches',isAuthenticated,getMatches );
+router.post('/swipe-left/:id',isAuthenticated, unmatchProfile)
+router.post('/swipe-right/:id',isAuthenticated,SwipeRight)
+router.post('/match/:id',isAuthenticated, deleteMatchWithUser);
 
 
 

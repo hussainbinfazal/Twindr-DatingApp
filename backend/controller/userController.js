@@ -75,13 +75,13 @@ const updateUser = async (req, res) => {
 const useAuthenticationToken = async (req, res, next) => {
    
     try {
-        const user = await User.findById(req.user.id).select('-password');
+        const user = await User.findById(req.user.id || req.user._id).select('-password');
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
         return res.status(200).json({ message: 'User is authenticated', user: user });
     } catch (error) {
-        console.error("Error in authentication:", error);
+        // console.error("Error in authentication:", error);
         return res.status(401).json({ message: 'Unauthorized, Please Login first' });
     }
 };

@@ -18,10 +18,12 @@ const isAuthenticated = async (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
         const user = await User.findById(decoded.id).select('-password');
         req.user = user;
         next();
     } catch (error) {
+        // console.log("Error in isAuthenticated middleware:", error);
         console.error("isAuthentication error:", error);
         res.status(401).json({ message: 'Not authorized, token failed' });
     }
