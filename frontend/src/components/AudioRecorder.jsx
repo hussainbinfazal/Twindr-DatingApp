@@ -26,7 +26,7 @@ const AudioRecorder = ({ onAudioRecorded }) => {
       mediaRecorderRef.current.start();
       setIsRecording(true);
     } catch (error) {
-      console.error("Error accessing microphone:", error);
+      // console.error("Error accessing microphone:", error);
     }
   };
 

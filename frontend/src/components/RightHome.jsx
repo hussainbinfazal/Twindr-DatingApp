@@ -96,33 +96,37 @@ const RightHome = ({
   };
 
   const getProfiles = useCallback(async () => {
+    setLoading(true);
     try {
+      
       await getAllProfiles();
     } catch (error) {
-      console.error("Error fetching profiles:", error);
+      // console.error("Error fetching profiles:", error);
+    }finally {
+      setLoading(false);
     }
   },[getAllProfiles]);
   useEffect(() => {
     if (authUserProfile) {
       getProfiles();
     }
-  }, [, authUserProfile, handleSwipe]);
+  }, [authUserProfile, swiped]);
 
-  useEffect(() => {
-    let interval;
-    if (profiles.length === 0 && !loading) {
-      setLoading(true);
-      interval = setInterval(() => {
-        getAllProfiles();
-      }, 10000);
-    }
+  // useEffect(() => {
+  //   let interval;
+  //   if (profiles.length === 0 && !loading) {
+  //     setLoading(true);
+  //     interval = setInterval(() => {
+  //       getAllProfiles();
+  //     }, 10);
+  //   }
 
 
-    return () => {
-      clearInterval(interval);
-      setLoading(false);
-    };
-  }, [profiles, loading, getAllProfiles]);
+  //   return () => {
+  //     clearInterval(interval);
+  //     setLoading(false);
+  //   };
+  // }, [profiles, loading, getAllProfiles]);
 
   return (
     <div

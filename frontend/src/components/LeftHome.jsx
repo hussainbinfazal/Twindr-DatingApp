@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import { useEffect, useState } from "react";
 import { FiMessageSquare } from "react-icons/fi";
 import { useMatchStore } from "../store/useMatchStore";
@@ -10,7 +10,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { initializeSocket, disconnectSocket } from "../socket/socketclient";
 import Badge from "./Badge";
 import { getSocket } from "../socket/socketclient";
-const LeftHome = ({isConnectionVisible}) => {
+const LeftHome = ({isConnectionVisible ,leftHeaderChatpage}) => {
   //  const [myMatches, setMyMatches] = useState([]);
   const { authUser } = useAuthStore();
   const { matches, getMyMatches } = useMatchStore();
@@ -73,7 +73,7 @@ const LeftHome = ({isConnectionVisible}) => {
   return (
       
       <div className={`connection-panel w-[40%] sm:w-[30%] md:w-[30%] lg:w-[30%] xl:w-[30%] 2xl:w-[30%] absolute sm:relative lg:relative md:relative xl:relative 2xl:relative z-50 h-full ${isConnectionVisible ? "block" : "hidden"} sm:block md:block lg:block xl:block 2xl:block sm:flex-col md:flex-col lg:flex-col xl:flex-col 2xl:flex-col `}>
-        <div className="w-full h-[63px] px-4 flex justify-between items-center text-[#FD5169] bg-white border-b ">
+        <div className={`w-full ${leftHeaderChatpage ? "h-[75px] items-center pb-1 pt-4"  : "h-[63px] items-center"} px-4 flex justify-between  text-[#FD5169] bg-white border-b `}>
           <h2 className="text-sm sm:text-lg  md:text-2xl lg:text-2xl xl:text-2xl text-[#FD5169]">Your Connections</h2>
           <div className="relative">
             <FiMessageSquare className="text-2xl" />

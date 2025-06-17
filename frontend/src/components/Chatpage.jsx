@@ -50,6 +50,8 @@ const Chatpage = () => {
   const [editingMessageId, setEditingMessageId] = useState(null);
   const menuRef = useRef(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [headerChatpage, setHeaderChatpage] = useState(true);
+  const [leftHeaderChatpage, setLeftHeaderChatpage] = useState(true);
   const handleUpdateMessageStatus = (messageId, messageStatus) => {
     updateMessageStatus(messageId, messageStatus);
   };
@@ -219,15 +221,16 @@ const Chatpage = () => {
     setMessage((prev) => prev + emojiData.emoji);
   };
   return (
-    <div className="w-full h-full flex">
+    <div className="w-full h-full flex min-h-screen overflow-y none">
       <div ref={messagesEndRef} />
-      <LeftHome />
+      <LeftHome leftHeaderChatpage={leftHeaderChatpage}/>
       <div className="w-full md:w-[70%] lg:w-[70%] xl:[70%] 2xl:w-[70%] h-full">
         <Header
           value={activeMatchName ? activeMatchName : componentName}
           profileId={matchedUserId}
           showName={true}
           matchedUserImage={matchProfile.profilePicture}
+          headerChatpage={true}
         />
         <div className="w-full h-[calc(100%-60px)] flex flex-col justify-between items-center bg-white">
           <div className="Messages w-full h-full text-black  relative overflow-y-auto ">

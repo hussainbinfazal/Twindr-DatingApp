@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { MdOutlineWorkOutline } from "react-icons/md";
 import { HiOutlineAcademicCap } from "react-icons/hi";
 import LeftHome from "../components/LeftHome";
+import { useCallback } from "react";
 const MatchProfile = ({
   toggleConnectionPanel,
   isConnectionVisible,
@@ -30,20 +31,24 @@ const MatchProfile = ({
     }
   };
 
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      await getSingleProfile(profileId);
+   const fetchProfileData = useCallback(async () => {
+      setLoading(true);
+      try{
+        await getSingleProfile(profileId);
+      }catch (error) {
+        // console.error("Error fetching profile data:", error);
+      }
       setLoading(false);
-    };
+    },[profileId]);
+  useEffect(() => {
     fetchProfileData();
   }, [profileId, getSingleProfile]);
-  useEffect(() => {}, [profileId]);
 
   useEffect(() => {
     setProfile(matchProfile);
   }, [matchProfile]);
 
-  if (loading && !profile) {
+  if (loading ) {
     return <Loading />;
   }
   return (

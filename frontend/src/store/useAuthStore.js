@@ -138,7 +138,7 @@ export const useAuthStore = create((set) => ({
         const token = localStorage.getItem("token");
         // if (token) {
             if (!token) {
-                console.error("You are not logged in.");
+                // console.error("You are not logged in.");
             }
         try {
             const response = await axiosInstance.get('/users/me', {

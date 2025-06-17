@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import LeftHome from "./LeftHome";
 import toast, { Toaster } from "react-hot-toast";
+import { useCallback } from "react";
 
 
 const User = ({
@@ -28,13 +29,11 @@ const User = ({
   const [age, setAge] = useState(authUser?.profile?.age || "");
   const [gender, setGender] = useState(authUser?.profile?.gender || "");
   const [email, setEmail] = useState(authUser?.profile?.email || "");
-  // const [password, setPassword] = useState(authUser?.profile?.password || "");
   const [genderPreferences, setGenderPreferences] = useState(
     authUser?.profile?.genderPreferences || ""
   );
   const [bio, setBio] = useState(authUser?.profile?.bio || "");
   const [profilePicture, setProfilePicture] = useState("");
-  // authUser?.profile?.profilePicture ||
   const [interests, setInterests] = useState(
     authUser?.profile?.interests || ""
   );
@@ -46,14 +45,9 @@ const User = ({
   );
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
-  // const [imageName, setImageName] = useState("");
   const fileInput = useRef();
   const [headerName, setHeaderName] = useState("Profile");
-  // const [isConnectionVisible, setIsConnectionVisible] = useState(false);
 
-  // const toggleConnectionPanel = () => {
-  //   setIsConnectionVisible((prevState) => !prevState);
-  // };
   const [emailError, setEmailError] = useState("");
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -75,7 +69,6 @@ const User = ({
     setAge("");
     setGender("");
     setEmail("");
-    // setPassword("");
     setGenderPreferences("");
     setBio("");
     setProfilePicture("");
@@ -99,7 +92,7 @@ const User = ({
     } else {
     }
   };
-  const fetchProfileDetails = () => {
+  const fetchProfileDetails = useCallback(() => {
     if (authUserProfile) {
       setName(authUserProfile.name || "");
       setAge(authUserProfile.age || "");
@@ -113,7 +106,7 @@ const User = ({
       setOccupation(authUserProfile.occupation || "");
       setGenderPreferences(authUserProfile.genderPreferences || "");
     }
-  };
+  },[authUserProfile]);
   const handleCreateProfile = async (e) => {
     e.preventDefault();
     if (authUser && authUser._id) {
@@ -127,7 +120,6 @@ const User = ({
         return;
       }
       formData.append("email", email);
-      // formData.append("password", password);
       formData.append("genderPreferences", genderPreferences);
       formData.append("bio", bio);
       if (profilePicture) {
@@ -140,7 +132,6 @@ const User = ({
 
       await createProfile(formData);
 
-      // createProfile({ name, age, gender, email, genderPreferences,bio,profilePicture,interests,education,occupation, user: authUser._id });
     } else {
     }
   };
@@ -263,7 +254,7 @@ const User = ({
             value={name}
             maxLength={40}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Full Name"
+            placeholder="User Name"
             className="h-[60px] border-2 border-gray-300 border-solid outline-none rounded-full  text-gray-800  placeholder:text-gray-400 placeholder:text-2xl placeholder:px-4 p-6 "
           />
           <input
@@ -273,7 +264,7 @@ const User = ({
             type="text"
             maxLength={40}
             autoComplete="off"
-            placeholder="male/female/both"
+            placeholder="Gender"
             className="h-[60px] border-2 border-gray-300 border-solid outline-none rounded-full  text-gray-800  placeholder:text-gray-400 placeholder:text-2xl placeholder:px-4 p-6 "
           />
           <input

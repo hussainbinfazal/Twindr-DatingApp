@@ -19,6 +19,7 @@ const Header = ({
   showName,
   matchedUserImage,
   profileId,
+  headerChatpage
 
 }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -68,7 +69,7 @@ const Header = ({
   
 
   return (
-    <div className="w-full h-[63px] flex justify-between items-center px-4 bg-[#fefcffdd] z-10">
+    <div className={`w-full ${headerChatpage ? "h-[75px] pb-1  items-center pt-6" : "h-[65px] items-center"} flex justify-between  px-4 bg-[#fefcffdd] z-10`}>
       <FaHeart
         className={`heart-icon ${
           isConnectionVisible ? "hidden" : "block"
@@ -86,7 +87,7 @@ const Header = ({
 
       {
         <div className="flex gap-4 items-center text-black sm:ml-20 md:ml-20 lg:ml-20 xl:ml-30 2xl:ml-30">
-          {matchedUserImage && <img src={`${import.meta.env.VITE_API_URL}${matchedUserImage}`} alt="" srcset="" className="h-[40px] w-[40px] rounded-full  object-fit" />}
+          {matchedUserImage && <img src={`${import.meta.env.VITE_API_URL}${matchedUserImage}`} alt=""  className="h-[40px] w-[40px] rounded-full  object-fit" />}
           <h2
             className="capitalize cursor-pointer"
             onClick={() => {
