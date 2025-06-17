@@ -21,32 +21,7 @@ const RightHome = ({
   const [loading, setLoading] = useState(true);
   const [headerName, setHeaderName] = useState("Home");
   const tinderCardRefs = useRef([]);
-  // const initialPeople = [
-  //   {
-  //     name: "John",
-  //     imgUrl:
-  //       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGluZGVyJTIwcHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-  //     university: "University of United kingdom",
-  //     work: "Software Engineer",
-  //     age: "24",
-  //   },
-  //   {
-  //     name: "Mary",
-  //     imgUrl:
-  //       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGluZGVyJTIwcHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-  //     university: "University of United states of America",
-  //     work: "Doctor",
-  //     age: "26",
-  //   },
-  //   {
-  //     name: "Jane",
-  //     imgUrl:
-  //       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGluZGVyJTIwcHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D1",
-  //     university: "University of United kingdom",
-  //     work: "Software developer",
-  //     age: "22",
-  //   },
-  // ];
+  
 
   const [people, setPeople] = useState([]);
   const [swipedCount, setSwipedCount] = useState(0);
@@ -193,12 +168,12 @@ const RightHome = ({
           )
         ) : (
           <div className="w-full h-full flex flex-col justify-center items-center gap-6">
-            <h2 className="text-black z-10 w-full flex flex-col text-xl justify-center items-center">
+            <span className="text-black z-10 w-full flex flex-col text-xl justify-center items-center">
               <h3>Please create your profile first</h3>
               <Link to="/profile" className="text-white font-semibold text-xl">
                 <span>Create profile</span>
               </Link>
-            </h2>
+            </span>
           </div>
         )}
       </div>

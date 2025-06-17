@@ -87,7 +87,7 @@ const Header = ({
 
       {
         <div className="flex gap-4 items-center text-black sm:ml-20 md:ml-20 lg:ml-20 xl:ml-30 2xl:ml-30">
-          {matchedUserImage && <img src={`${import.meta.env.VITE_API_URL}${matchedUserImage}`} alt=""  className="h-[40px] w-[40px] rounded-full  object-fit" />}
+          {matchedUserImage && <img src={`${import.meta.env.VITE_API_URL}${matchedUserImage}`} srcSet="" alt=""  className="h-[40px] w-[40px] rounded-full  object-fit" />}
           <h2
             className="capitalize cursor-pointer"
             onClick={() => {
@@ -110,7 +110,7 @@ const Header = ({
                   authUserProfile.profilePicture
                 }`}
                 alt=""
-                srcset=""
+                srcSet=""
                 onClick={handleProfileClick}
                 id="profileIcon"
                 className="  h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] md:h-[50px] md:w-[50px]
@@ -122,7 +122,7 @@ const Header = ({
                   "https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
                 }
                 alt=""
-                srcset=""
+                srcSet=""
                 onClick={handleProfileClick}
                 id="profileIcon"
                 className="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] md:h-[50px] md:w-[50px]
