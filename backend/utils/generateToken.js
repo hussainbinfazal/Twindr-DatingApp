@@ -9,6 +9,8 @@ const generateToken = (userId, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production' ? true : "",
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'Lax', maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+            domain: process.env.NODE_ENV === 'production' ? process.env.JWT_DOMAIN : undefined
+
         });
         return token;
     } catch (error) {
