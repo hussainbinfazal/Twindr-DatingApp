@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const loginDetails = () => {
     setEmail("");
@@ -21,9 +21,11 @@ const Login = () => {
         <form
           className="w-full h-full flex flex-col gap-8"
           onSubmit={(e) => {
+            setLoading(true);
             e.preventDefault();
             loginDetails();
             loginUser({ email, password }, navigate);
+            setLoading(false);
           }}
         >
           <input
@@ -50,9 +52,9 @@ const Login = () => {
           <div className="w-full flex justify-center items-center ">
             <button
               type="submit"
-              className="text-white  w-[250px] h-[50px] rounded-full bg-[#FD5169] text-lg sm:mt-10 md:mt-10 lg:mt-10 xl:mt-10 2xl:mt-10 hover:scale-105 transform transition-all duration-300 ease-in-out"
+              className={`text-white  w-[250px] h-[50px] rounded-full bg-[#FD5169] text-lg sm:mt-10 md:mt-10 lg:mt-10 xl:mt-10 2xl:mt-10 hover:scale-105 transform transition-all duration-300 ease-in-out ${loading ? "cursor-not-allowed opacity-50" : ""}`}
             >
-              Log In
+              {loading ? ("Logging in") : ("Log In")}
             </button>
           </div>
         </form>
