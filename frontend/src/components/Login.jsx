@@ -6,13 +6,12 @@ import toast from "react-hot-toast";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const loginDetails = () => {
     setEmail("");
     setPassword("");
   };
-  const { loginUser } = useAuthStore();
+  const { loginUser,loading } = useAuthStore();
 
   return (
     <div className="w-full h-full gap-10 flex flex-col sm:justify-center md:justify-center lg:justify-center xl:justify-center 2xl:justify-center pt-10 items-center">

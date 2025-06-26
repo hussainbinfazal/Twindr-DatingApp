@@ -6,40 +6,76 @@ import { getSocket } from '../socket/socketclient';
 export const useMatchStore = create((set) => ({
 
     matches: [],
+    loading: false,
     matchBetween: null,
     getMyMatches: async () => {
+        const token = localStorage.getItem("token");
+        set({ loading: true });
         try {
-            const response = await axiosInstance.get("/match/matches");
-            set({ matches: response.data.matches});
+            const response = await axiosInstance.get("/match/matches", {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+            });
+            set({ matches: response.data.matches });
+            set({ loading: false });
         } catch (error) {
-            set({ matches: []});
+            set({ matches: [] });
             toast.error("Matches not fetched");
 
         }
     },
     unMatchProfile: async (userId) => {
+        const token = localStorage.getItem("token");
+        set({ loading: true });
         try {
-            const response = await axiosInstance.post(`/match/swipe-left/${userId}`)
+            const response = await axiosInstance.post(`/match/swipe-left/${userId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+            })
             set({ matches: response.data });
             toast.error("Profile unmatched")
+            set({ loading: false });
+
         } catch (error) {
             toast.error("Profile not unmatched")
         }
     },
     createMatch: async (userId) => {
+        set({ loading: true });
+        const token = localStorage.getItem("token");
         try {
-            const response = await axiosInstance.post(`/match/swipe-right/${userId}`)
+            const response = await axiosInstance.post(`/match/swipe-right/${userId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+            })
             set({ matches: response.data.profile });
             toast.success("Match request send")
+            set({ loading: false });
+
         } catch (error) {
             toast.error(" Internal server Error")
         }
     },
     deleteMatches: async (userId) => {
+        set({ loading: true });
+        const token = localStorage.getItem("token");
         try {
-            const response = await axiosInstance.delete(`/match/match/${userId}`)
+            const response = await axiosInstance.delete(`/match/match/${userId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+            })
             set({ matches: response.data });
             toast.success("Match deleted successfully")
+            set({ loading: false });
+
         } catch (error) {
             toast.error("Match is not deleted")
         }

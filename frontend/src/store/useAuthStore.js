@@ -14,15 +14,23 @@ export const useAuthStore = create((set) => ({
 
     authUser: null,
     authUserProfile: null,
+    loading: false,
     checkingAuth: true,
 
 
     deleteProfile: async (profileId) => {
+        const token = localStorage.getItem("token");
+        set({ loading: true });
         try {
-            const response = await axiosInstance.delete(`/profile/${profileId}`)
+            const response = await axiosInstance.delete(`/profile/${profileId}`,{
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+            })
             set({ authUserProfile: null }); // Clear the authUserProfile(null);
             toast.success(response.data.message);
-
+            set({ loading: false });
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.message || "Something went wrong";
             toast.error(errorMessage);
@@ -31,44 +39,59 @@ export const useAuthStore = create((set) => ({
         }
     },
     fetchProfile: async (userId) => {
+        const token = localStorage.getItem("token");
+        set({ loading: true });
         try {
-            const response = await axiosInstance.get(`/profile/user/${userId}`);
+            const response = await axiosInstance.get(`/profile/user/${userId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+            });
             const { profile } = response.data;
             set({ authUserProfile: profile });
-
+            set({ loading: false });
             // set({ authUser: response.data });
         } catch (error) {
 
         }
     },
     updateProfile: async (profileData, userId) => {
+        const token = localStorage.getItem("token");
+
+        set({ loading: true });
         try {
-            const response = await axiosInstance.put(`profile/${userId}`, profileData ,{
+            const response = await axiosInstance.put(`profile/${userId}`, profileData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${token}`
                 }
             });
-    
+
 
             const { profile } = response.data;
             set({ authUserProfile: profile });
             toast.success(response.data.message);
-
+            set({ loading: false });
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.message || "Something went wrong";
             toast.error(errorMessage);
         }
     },
     createProfile: async (profileData) => {
+        const token = localStorage.getItem("token");
+        set({ loading: true })
         try {
             const response = await axiosInstance.post('/profile/create', profileData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${token}`
                 },
 
             });
             const { profile } = response.data;
             set({ authUserProfile: profile });
+            set({ loading: false });
             toast.success(response.data.message);
         } catch (error) {
             toast.error("Something went wrong");
@@ -76,6 +99,7 @@ export const useAuthStore = create((set) => ({
         }
     },
     logoutUser: async (navigate) => {
+        set({ loading: true });
         try {
             const response = await axiosInstance.post('/users/logout',);
             set({ authUser: null });
@@ -83,6 +107,7 @@ export const useAuthStore = create((set) => ({
             disconnectSocket();
             localStorage.removeItem("token");
             navigate('/login');
+            set({ loading: false });
             toast.success(response.data.message);
         } catch (error) {
             toast.error(error.response.data.message
@@ -95,6 +120,7 @@ export const useAuthStore = create((set) => ({
     },
 
     loginUser: async (loginData, navigate) => {
+        set({ loading: true });
         try {
             const response = await axiosInstance.post('/users/login', loginData);
             const { token, user } = response.data;
@@ -102,6 +128,7 @@ export const useAuthStore = create((set) => ({
             localStorage.setItem('token', token);
             initializeSocket(user._id);
             navigate('/Home');
+            set({ loading: false });
             toast.success('login Successfull');
         } catch (error) {
             toast.error(error.response.data.message
@@ -114,12 +141,14 @@ export const useAuthStore = create((set) => ({
     },
 
     registerUser: async (signupData, navigate) => {
+        set({ loading: true });
         try {
-            const response = await axiosInstance.post('/users/register', signupData);
+            const response = await axiosInstance.post('/users/register', signupData,);
             const { token, user } = response.data;
             set({ authUser: user });
             initializeSocket(user._id)
             localStorage.setItem("token", token);
+            set({ loading: false });
             navigate('/Home');
             toast.success('User Registered Successfully');
         } catch (error) {
@@ -137,9 +166,9 @@ export const useAuthStore = create((set) => ({
     checkAuth: async () => {
         const token = localStorage.getItem("token");
         // if (token) {
-            if (!token) {
-                // console.error("You are not logged in.");
-            }
+        if (!token) {
+            // console.error("You are not logged in.");
+        }
         try {
             const response = await axiosInstance.get('/users/me', {
                 headers: {
@@ -149,13 +178,13 @@ export const useAuthStore = create((set) => ({
                 withCredentials: true
             });
             set({ authUser: response.data.user, checkingAuth: false });
-            
+
 
         } catch (error) {
             set({ checkingAuth: false, authUser: null });
-            
+
         }
-       
+
     }
 
 }));
