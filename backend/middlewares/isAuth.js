@@ -5,9 +5,9 @@ const User = require('../model/userModel');
 const isAuthenticated = async (req, res, next) => {
     let token;
 
-    if (req.cookies.token) {
-        token = req.cookies.token;
-    }
+    // if (req.cookies.token) {
+    //     token = req.cookies.token;
+    // }
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1];
     }
