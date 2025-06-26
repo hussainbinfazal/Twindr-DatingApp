@@ -12,8 +12,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [genderPreferences, setGenderPreferences] = useState("");
   const navigate = useNavigate();
-const [loading, setLoading] = useState(false);
-  const { registerUser } = useAuthStore();
+  const { registerUser, loading } = useAuthStore();
   const signUp = () => {
     if (!validateEmail(email)) {
       setEmailError("Please enter a valid email address.");
@@ -27,8 +26,8 @@ const [loading, setLoading] = useState(false);
     setName("");
     setGenderPreferences("");
   };
-    const [emailError, setEmailError] = useState("");
-  
+  const [emailError, setEmailError] = useState("");
+
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email.toLowerCase());
@@ -51,14 +50,12 @@ const [loading, setLoading] = useState(false);
         <form
           className="w-full h-full flex flex-col gap-8"
           onSubmit={(e) => {
-            setLoading(true);
             e.preventDefault();
             signUp();
             registerUser(
               { name, email, password, gender, age, genderPreferences },
               navigate
             );
-            setLoading(false);
           }}
         >
           <input
@@ -116,7 +113,9 @@ const [loading, setLoading] = useState(false);
           <div className="w-full flex justify-center items-center mt-10">
             <button
               type="submit"
-              className={`"text-white  w-[250px] h-[50px] rounded-full bg-[#FD5169] text-lg sm:mt-10 mt-0 md:mt-10 xl:mt-10 2xl:mt-10 mb-4 hover:scale-105 transition-all ease-in-out active:scale-90 ${loading ? "cursor-not-allowed opacity-50" : ""}`}
+              className={`"text-white  w-[250px] h-[50px] rounded-full bg-[#FD5169] text-lg sm:mt-10 mt-0 md:mt-10 xl:mt-10 2xl:mt-10 mb-4 hover:scale-105 transition-all ease-in-out active:scale-90 ${
+                loading ? "cursor-not-allowed opacity-50" : ""
+              }`}
             >
               {loading ? "Creating account..." : "Create Account"}
             </button>

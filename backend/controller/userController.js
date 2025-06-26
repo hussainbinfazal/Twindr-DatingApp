@@ -1,7 +1,7 @@
-const User = require('../model/userModel');  
+const User = require('../model/userModel');
 const Profile = require('../model/profileModel');
-const bcrypt = require('bcrypt');  
-const jwt = require('jsonwebtoken');  
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const generateToken = require('../utils/generateToken');
 // Create User
 const createUser = async (req, res) => {
@@ -10,12 +10,12 @@ const createUser = async (req, res) => {
         const hashpassword = await bcrypt.hash(password, 10);
         const user = await User.create({ name, email, password: hashpassword, gender, age, genderPreferences, });
         await user.save();
-        const token =  generateToken(user._id, res);
+        const token = generateToken(user._id, res);
         res.status(201).json({
             success: true,
             message: 'User created successfully',
-            user:user,
-            token:token
+            user: user,
+            token: token
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -73,7 +73,7 @@ const updateUser = async (req, res) => {
 
 // Use Authentication Token
 const useAuthenticationToken = async (req, res, next) => {
-   
+
     try {
         const user = await User.findById(req.user.id || req.user._id).select('-password');
         if (!user) {
@@ -88,6 +88,7 @@ const useAuthenticationToken = async (req, res, next) => {
 
 // Login User
 const loginUser = async (req, res) => {
+    console.log("login controller called");
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -102,7 +103,7 @@ const loginUser = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: 'User logged in successfully',
-            user:user,
+            user: user,
             token: token
         });
 
@@ -124,13 +125,13 @@ const logoutUser = async (req, res) => {
     }
 };
 
-module.exports = { 
-    createUser, 
-    getAllUsers, 
-    getUserById, 
-    updateUser, 
-   
-    useAuthenticationToken, 
-    loginUser, 
-    logoutUser 
+module.exports = {
+    createUser,
+    getAllUsers,
+    getUserById,
+    updateUser,
+
+    useAuthenticationToken,
+    loginUser,
+    logoutUser
 };  // Exporting all functions using module.exports

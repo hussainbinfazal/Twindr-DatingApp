@@ -21,8 +21,7 @@ const RightHome = ({
   const [loading, setLoading] = useState(true);
   const [headerName, setHeaderName] = useState("Home");
   const tinderCardRefs = useRef([]);
-  
-
+  const [allSwiped, setAllSwiped] = useState(false);
   const [people, setPeople] = useState([]);
   const [swipedCount, setSwipedCount] = useState(0);
   const swiped = (direction, person) => {
@@ -52,8 +51,11 @@ const RightHome = ({
     if (profiles && Array.isArray(profiles.profiles)) {
       setPeople(profiles.profiles);
       setLoading(false); // Set loading to false once profiles are fetched
+      setAllSwiped(false);
     } else {
-      setLoading(true); // In case no profiles found, stop loading
+      setPeople([]);
+      setLoading(false);
+      setAllSwiped(true); // In case no profiles found, stop loading
     }
   }, [profiles]);
   const addTinderCardRef = (index, ref) => {
@@ -73,35 +75,45 @@ const RightHome = ({
   const getProfiles = useCallback(async () => {
     setLoading(true);
     try {
-      
       await getAllProfiles();
     } catch (error) {
       // console.error("Error fetching profiles:", error);
-    }finally {
+    } finally {
       setLoading(false);
     }
-  },[getAllProfiles]);
+  }, [getAllProfiles]);
   useEffect(() => {
     if (authUserProfile) {
       getProfiles();
     }
-  }, [authUserProfile, swiped]);
+  }, [authUserProfile, getProfiles]);
 
-  // useEffect(() => {
-  //   let interval;
-  //   if (profiles.length === 0 && !loading) {
-  //     setLoading(true);
-  //     interval = setInterval(() => {
-  //       getAllProfiles();
-  //     }, 10);
-  //   }
+  useEffect(() => {
+    if (people.length > 0 && swipedCount >= people.length) {
+      setAllSwiped(true);
+      setSwipedCount(0); // Reset swipe count
+      setTimeout(() => {
+        getProfiles();
+      }, 500);
+    }
+  }, [swipedCount, people.length]);
 
+  useEffect(() => {
+    let interval;
+    if (authUserProfile && people.length === 0 && !loading && allSwiped) {
+      // Set up an interval to check for new profiles every 30 seconds
+      interval = setInterval(() => {
+        console.log("Checking for new profiles...");
+        getProfiles();
+      }, 15000); // 30 seconds
+    }
 
-  //   return () => {
-  //     clearInterval(interval);
-  //     setLoading(false);
-  //   };
-  // }, [profiles, loading, getAllProfiles]);
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [authUserProfile, people.length, loading, allSwiped, getProfiles]);
 
   return (
     <div

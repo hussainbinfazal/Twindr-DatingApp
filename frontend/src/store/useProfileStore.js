@@ -11,6 +11,7 @@ export const useProfileStore = create((set, get) => ({
     getAllProfiles: async () => {
         set({ loading: true })
         const token = localStorage.getItem("token");
+        
         try {
             const response = await axiosInstance.get('/profile/profiles', {
                 headers: {

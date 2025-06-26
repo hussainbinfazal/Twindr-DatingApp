@@ -23,6 +23,7 @@ const User = ({
     authUserProfile,
     deleteProfile,
     logoutUser,
+    loading
   } = useAuthStore();
 
   const [name, setName] = useState(authUser?.profile?.name || "");
@@ -374,7 +375,7 @@ const User = ({
                   alt=""
                   className="relative top-0 right-0 w-full h-full rounded-lg"
                 />
-                <div className="absolute top-2 right-8 w-[30px] h-[30px] rounded-full bg-red-300 flex items-center justify-center">
+                <div className="absolute top-2 right-0 sm:right-8 w-[30px] h-[30px] rounded-full bg-red-300 flex items-center justify-center">
                   <ImCross
                     className={`top-0 right-0 text-[#FA2E60] w-[20px] h-[20px] cursor-pointer rounded-full`}
                     onClick={handleClear}
@@ -390,15 +391,15 @@ const User = ({
               <div className="w-full flex justify-center items-center mt-4 gap-4 pb-8">
                 <button
                   onClick={handleUpdateProfile}
-                  className="text-white w-[250px] h-[50px] rounded-full bg-[#FD5169] text-lg mt-6"
+                  className="text-white w-[250px] h-[50px] rounded-full bg-[#FD5169] text-sm mt-6"
                 >
-                  Update Profile
+                  {loading ? "Updating..." : "Update Profile"}
                 </button>
                 <button
                   onClick={handleDeleteProfile}
-                  className="text-white w-[250px] h-[50px] rounded-full bg-[#FD5169] text-lg mt-6"
+                  className="text-white w-[250px] h-[50px] rounded-full bg-[#FD5169] text-sm mt-6"
                 >
-                  Delete Profile
+                  {loading ? "Deleting..." : "Delete Profile"}
                 </button>
               </div>
             ) : (
@@ -407,7 +408,7 @@ const User = ({
                   onClick={handleCreateProfile}
                   className="text-white w-[250px] h-[50px] rounded-full bg-[#FD5169] text-lg mt-10 mb-4"
                 >
-                  Create Profile
+                  {loading ? "Creating..." : "Create Profile"}
                 </button>
               </div>
             )}

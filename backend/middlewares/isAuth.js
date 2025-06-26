@@ -5,14 +5,14 @@ const User = require('../model/userModel');
 const isAuthenticated = async (req, res, next) => {
     let token;
 
-    // if (req.cookies.token) {
-    //     token = req.cookies.token;
-    // }
+    if (req.cookies.token) {
+        token = req.cookies.token;
+    }
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1];
     }
 
-    if (!token) {
+    if (!token || token === 'null') {
         return res.status(401).json({ message: 'Not authorized, no token' });
     }
 

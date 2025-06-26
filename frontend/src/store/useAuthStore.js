@@ -120,6 +120,7 @@ export const useAuthStore = create((set) => ({
     },
 
     loginUser: async (loginData, navigate) => {
+        console.log("login controller called in store");
         set({ loading: true });
         try {
             const response = await axiosInstance.post('/users/login', loginData);
@@ -167,7 +168,7 @@ export const useAuthStore = create((set) => ({
         const token = localStorage.getItem("token");
         // if (token) {
         if (!token) {
-            // console.error("You are not logged in.");
+            console.error("You are not logged in.");
         }
         try {
             const response = await axiosInstance.get('/users/me', {
